@@ -35,7 +35,11 @@
                 // console.log(xhr.responseText);
                 // check validation about input value => select db
                 var result = JSON.parse(xhr.responseText);
-                document.querySelector(".result").innerHTML = result.email;
+                var resultDiv = document.querySelector(".result")
+                if(result.result !== "ok") resultDiv.innerHTML = "your email is not found"
+                else resultDiv.innerHTML = result.name;
+                // document.querySelector(".result").innerHTML = result.name;
+         
             });
         }
     </script>
