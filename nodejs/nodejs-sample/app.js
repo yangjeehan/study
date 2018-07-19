@@ -2,8 +2,7 @@
 var express = require('express')
 var app = express()
 var bodyParser = require('body-parser')
-var main = require('./router/main')
-var email = require('./router/email')
+var router = require('./router/index')
 
 // npm install cors --save
 var cors = require('cors');
@@ -28,16 +27,4 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.set('view engine', 'ejs')
 // 미리 html을 만들어두고 응답 ( ex) ejs 을 통해 ) 
 // npm install ejs --save
-
-// 각 url호출시 부를 거 
-app.use('/main', main)
-app.use('/email', email)
-
-app.get('/', function(req,res) {
-    //res.send("<h1>test</h1>")
-    res.sendFile(__dirname + "/public/main.html")
-})
-
-//for(var i=0; i < 1000 ;i++) {
-//    console.log('ggg');
-//}
+app.use(router)
