@@ -3,6 +3,11 @@ var express = require('express')
 var app = express()
 var bodyParser = require('body-parser')
 var router = require('./router/index')
+var passport = require('passport')
+var LocalStrategy = require('passport-local').Strategy
+var session = require('express-session')
+// msg을 쉽게 전달해주기위해사용
+var flash = require('connect-flash')
 
 // npm install cors --save
 var cors = require('cors');
@@ -25,6 +30,22 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 // view engine은 ejs야 라고 알려줌 
 app.set('view engine', 'ejs')
+
+// express-session
+app.use(session({
+	secret : 'keyboard cat',
+	resave: false,
+	saveUninitialized: true
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(flash())
+
 // 미리 html을 만들어두고 응답 ( ex) ejs 을 통해 ) 
 // npm install ejs --save
 app.use(router)
+
+
+// session에 데이터를 저장하는 모듀을 설치하기 위해선 해당 모듈들을 설치해줘야함 
+// npm install passport passport-local express-session connect-flash --save-dev
+
