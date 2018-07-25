@@ -11,12 +11,13 @@ var flash = require('connect-flash')
 
 // npm install cors --save
 var cors = require('cors');
-// No 'Access-Control-Allow-Origin'
-app.use(cors({origin: '*'}))
 
 app.listen(3000, function(){
     console.log("start test");
 });
+
+// No 'Access-Control-Allow-Origin'
+app.use(cors({origin: '*'}))
 
 // static data접근에 public폴더를 통해 하겠다고 선언
 app.use(express.static('public'))

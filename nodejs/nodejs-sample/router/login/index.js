@@ -11,7 +11,7 @@ var connection = mysql.createConnection ({
     host : '127.0.0.1',
     port : 3306,
     user : 'root',
-    password : '',
+    password : 'yang123',
     database: 'test'
 })
  
@@ -28,16 +28,16 @@ router.get('/', function(req,res) {
 })
 
 // session을 저정하는처리
-passport.serializeUser(function(user,done) {
+passport.serializeUser(function(user, done) {
     console.log('passport session save:  ', user.id)
     done(null, user.id);
 });
 
-// session에 있는 값들을 뽑아서 페이지들에게 전달 
+// session에 있는 값들을 뽑아서 페이지들에게 전달   
 passport.deserializeUser(function(id, done) {
     console.log('passport session get id:  ', id)
     done(null, id);
-})
+});
 
 passport.use('local-login', new LocalStrategy({
         usernameField: 'email',
@@ -48,26 +48,27 @@ passport.use('local-login', new LocalStrategy({
             if(err) return done(err);
 
             if(rows.length) {
-                console.log('aa' + rows[0].UID)
-                return done(null, {'email' : email , 'id' : rows[0].userId })
+                 console.log('id :'+ rows[0].UID)
+                return done(null, {'email': email , 'id': rows[0].UID });
             } else {
-                return done(null, false, {'message': 'your login info  is not found >.<'})
+                return done(null, false, {'message': 'your login info  is not found >.<'});
             }
         })
     } 
 ));
 
-router.post('/', function(req,res,next) {
+router.post('/', function(req, res, next) {
     passport.authenticate('local-login', function(err,user,info){
         if(err) res.status(500).json(err);
         if(!user) return res.status(401).json(info.message);
       
-        req.login(user, function(err){
+        
+        req.logIn(user, function(err) {
             if(err) { return next(err);}
-            return res.json(user);
-        }) ;
-    })(req, res, next);
-})
 
+            return res.json(user);
+        });
+    })(req, res, next);
+});
 
 module.exports = router;

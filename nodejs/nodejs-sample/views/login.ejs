@@ -11,16 +11,17 @@
         </form>
     </body>
 
-    <button class="ajaxsend">login</button>
+    <button class="sendbtn">login</button>
 
     <div class="result"></div>
 
     <script>
-        document.querySelector('.ajaxsend').addEventListener('click', function() {
+        document.querySelector('.sendbtn').addEventListener('click', function() {
+            // e.preventDefault();
             var email = document.getElementsByName('email')[0].value;
             var password = document.getElementsByName('password')[0].value;
          
-            sendAjax('http://127.0.0.1:3000/login', {'email': email, 'password': password});
+            sendAjax('http://localhost:3000/login', {'email': email, 'password': password});
         })
         
         function sendAjax(url, data) {
@@ -35,8 +36,12 @@
                 var result = JSON.parse(xhr.responseText);
                 var resultDiv = document.querySelector(".result")
               
-                if(result.email) resultDiv.innerHTML = "welcome, " + result.email + "!!";
-                else resultDiv.innerHTML = result;
+                if(result.email){
+                    window.location.href="/main"
+                    // resultDiv.innerHTML = "welcome, " + result.email + "!!";
+                } else {
+                    resultDiv.innerHTML = result;
+                } 
                
             });
         }
