@@ -5,14 +5,15 @@ var path = require('path')
 var mysql = require('mysql')
 var passport = require('passport')
 var LocalStrategy = require('passport-local').Strategy
+var config = require('../../utils/db.json')
 
 // DATABASE SETTING
 var connection = mysql.createConnection ({
-    host : '127.0.0.1',
-    port : 3306,
-    user : 'root',
-    password : 'yang123',
-    database: 'test'
+    host : config.host,
+    port : config.port,
+    user : config.user,
+    password : config.password,
+    database: config.database
 })
  
 connection.connect();

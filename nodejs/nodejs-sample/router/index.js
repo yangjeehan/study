@@ -8,6 +8,8 @@ var login = require('./login/index')
 var logout = require('./logout/index')
 var join = require('./join/index')
 var movie = require('./movie/index')
+var test = require('./test/index')
+// var conn = require('../../config/mysql/db')();
 
 // url routing
 
@@ -28,5 +30,6 @@ router.use('/join', join)
 router.use('/login', login)
 router.use('/logout', logout)
 router.use('/movie', movie)
+router.use('/test',test)
 
 module.exports = router;

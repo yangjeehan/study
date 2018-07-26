@@ -3,14 +3,15 @@ var app = express()
 var router = express.Router();
 var path = require('path')
 var mysql = require('mysql')
+var config = require('../../utils/db.json')
 
 // DATABASE SETTING
 var connection = mysql.createConnection ({
-    host : 'localhost',
-    port : 3306,
-    user : 'root',
-    password : 'yang123',
-    database: 'test'
+    host : config.host,
+    port : config.port,
+    user : config.user,
+    password : config.password,
+    database: config.database
 })
  
 connection.connect();
