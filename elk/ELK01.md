@@ -70,4 +70,10 @@ service elasticsearch start
   }
 }
 
+##### 정리
+> curl -XGET localhost:9200/classes/class/1 ( select * from class where id =1 ) 
+curl -XPOST localhost:9200/classes/class/1 -d '{xxx}' ( insert into class values {xxx} )
+curl -XPUT localhost:9200/classes/class/1  ( update class set xxx where id =1 ) 
+curl -XDELETE localhost:9200/classes/class/1 ( delete from class where id =1 ) 
 
+ 
