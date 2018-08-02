@@ -23,7 +23,7 @@ service elasticsearch start
 {
   "name" : "GNYONiW",
   "cluster_name" : "elasticsearch",
-  "cluster_uuid" : "AZBiU8d3TL-AiixyGTAOXw",
+  "cluster_uuid" : "AZBiU8d3TL-AiixyGTAw",
   "version" : {
     "number" : "5.1.1",
     "build_hash" : "5395e21",
@@ -34,37 +34,12 @@ service elasticsearch start
   "tagline" : "You Know, for Search"
 }
 
-엘라스틱을 사용하는 이유
-
-
-$ curl -XGET localhost:9200/classes
-$ curl -XGET localhost:9200/classes?pretty
-
-root@443feb98591d:~# curl -XPUT localhost:9200/classes       
-{"acknowledged":true,"shards_acknowledged":true}root@443feb98591d:~#
-root@443feb98591d:~# curl -XGET localhost:9200/classes?pretty
-{
-  "classes" : {
-    "aliases" : { },
-    "mappings" : { },
-    "settings" : {
-      "index" : {
-        "creation_date" : "1533113090218",
-        "number_of_shards" : "5",
-        "number_of_replicas" : "1",
-        "uuid" : "cz15V5tuSlqrs44nUgRlmw",
-        "version" : {
-          "created" : "5010199"
-        },
-        "provided_name" : "classes"
-      }
-    }
-  }
-}
-
 사용방법 
 ##### 인덱스 삭제 
 > curl -XDELETE localhost:9200/classes
+
+#### 업데이트
+> curl -XPUT localhost:9200/classes       
 
 ##### 인덱스 입력 
 > curl -XPOST http://localhost:9200/classes/class/1/ -d '{"title":"Algorithm", "professor":"John" }'
